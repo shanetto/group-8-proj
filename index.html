@@ -1,47 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pinboard Selector</title>
-  <link rel="stylesheet" href="menusel.css" />
-</head>
-<body>
-  <div id="title-screen">
-  <h1 id="title-text">Pin The Tail On The Donkey!</h1>
-  <button id="enter-button">Enter</button>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pinboard Selector</title>
+    <link rel="stylesheet" href="menusel.css" />
+  </head>
+  <body>
+    <div id="title-screen">
+      <h1 id="title-text">Pin The Tail On The Donkey!</h1>
+      <button id="enter-button">Enter</button>
+    </div>
 
-  <div id="pinboard-wrapper">
-    <div id="pinboard">
-      <div id="screen-container">
-        <div class="screen" id="screen-1">
-          <img src="images/ears1.png" class="ear selectable" data-id="1" />
-          <img src="images/ears2.png" class="ear selectable" data-id="2" />
-          <img src="images/ears3.png" class="ear selectable" data-id="3" />
-          <img src="images/ears4.png" class="ear selectable" data-id="4" />
+    <div id="pinboard-wrapper">
+      <div id="pinboard">
+        <div id="screen-container">
+          <div class="screen" id="screen-1">
+            <img src="images/ears1.png" class="ear selectable" data-id="1" />
+            <img src="images/ears2.png" class="ear selectable" data-id="2" />
+            <img src="images/ears3.png" class="ear selectable" data-id="3" />
+            <img src="images/ears4.png" class="ear selectable" data-id="4" />
+          </div>
+
+          <div class="screen" id="screen-2">
+            <img src="images/tail1.png" class="ear selectable" data-id="5" />
+            <img src="images/tail2.png" class="ear selectable" data-id="6" />
+            <img src="images/tail3.png" class="ear selectable" data-id="7" />
+            <img src="images/tail4.png" class="ear selectable" data-id="8" />
+          </div>
         </div>
 
-        <div class="screen" id="screen-2">
-          <img src="images/tail1.png" class="ear selectable" data-id="5" />
-          <img src="images/tail2.png" class="ear selectable" data-id="6" />
-          <img src="images/tail3.png" class="ear selectable" data-id="7" />
-          <img src="images/tail4.png" class="ear selectable" data-id="8" />
+        <div id="nav-arrows">
+          <button id="left-arrow">←</button>
+          <button id="right-arrow">→</button>
         </div>
-      </div>
-
-      <!-- Put the arrows *inside the wrapper*, under the pinboard -->
-      <div id="nav-arrows">
-        <button id="left-arrow">←</button>
-        <button id="right-arrow">→</button>
       </div>
     </div>
-  </div>
 
-  <!-- Right half of the page -->
-  <div id="main-content">
+    <div id="main-content">
       <img src="images/donkeyb.png" id="donkey-image" />
-  </div>
+    </div>
 
-  <script src="menusel.js"></script>
-</body>
+    <script src="menusel.js"></script>
+  </body>
+</html>

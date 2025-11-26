@@ -1,5 +1,5 @@
-const pinboard = document.getElementById('pinboard');
-const screenContainer = document.getElementById('screen-container');
+const pinboard = document.getElementById("pinboard");
+const screenContainer = document.getElementById("screen-container");
 
 let currentScreen = 1;
 const screen1 = document.getElementById("screen-1");
@@ -23,9 +23,6 @@ function switchScreen(target) {
   currentScreen = target;
 }
 
-
-//store original page and slot index
-
 document.querySelectorAll(".ear").forEach((ear) => {
   ear.dataset.homeParent = ear.parentNode.id;
   ear.dataset.homeIndex = [...ear.parentNode.children].indexOf(ear);
@@ -33,13 +30,15 @@ document.querySelectorAll(".ear").forEach((ear) => {
 
 let dragged = null;
 let placeholder = null;
-let offsetX = 0, offsetY = 0;
+let offsetX = 0,
+  offsetY = 0;
 let pointerId = null;
 let raf = null;
-let targetX = 0, targetY = 0;
+let targetX = 0,
+  targetY = 0;
 
 function onPointerDown(e) {
-  if (e.pointerType === 'mouse' && e.button !== 0) return;
+  if (e.pointerType === "mouse" && e.button !== 0) return;
   e.preventDefault();
 
   dragged = e.currentTarget;
@@ -50,14 +49,12 @@ function onPointerDown(e) {
   offsetX = e.clientX - rect.left;
   offsetY = e.clientY - rect.top;
 
-  // Create placeholder in screen before moving
   placeholder = document.createElement("div");
   placeholder.className = "ear-placeholder";
   placeholder.style.width = rect.width + "px";
   placeholder.style.height = rect.height + "px";
   dragged.parentNode.insertBefore(placeholder, dragged);
 
-  // Move ear to body for free dragging
   document.body.appendChild(dragged);
   dragged.classList.add("dragging");
   dragged.style.position = "absolute";
@@ -101,14 +98,11 @@ function onPointerUp(e) {
     e.clientY >= pinRect.top &&
     e.clientY <= pinRect.bottom;
 
-
   if (placeholder) placeholder.remove();
 
   if (inside) {
-
     const homeParent = document.getElementById(dragged.dataset.homeParent);
     const homeIndex = parseInt(dragged.dataset.homeIndex, 10);
-
 
     restoreEarStyles(dragged);
 
@@ -122,7 +116,6 @@ function onPointerUp(e) {
 
     delete dragged.dataset.removedFromMenu;
   } else {
-
     dragged.dataset.removedFromMenu = "true";
     dragged.classList.remove("dragging");
     dragged.style.cursor = "grab";
@@ -147,14 +140,12 @@ function restoreEarStyles(el) {
   el.classList.remove("dragging");
 }
 
-
-document.querySelectorAll('.ear').forEach(ear => {
+document.querySelectorAll(".ear").forEach((ear) => {
   ear.style.touchAction = "none";
   ear.addEventListener("pointerdown", onPointerDown);
 });
 
-
-document.addEventListener("dblclick", e => {
+document.addEventListener("dblclick", (e) => {
   const el = e.target.closest(".ear");
   if (!el || el.dataset.removedFromMenu !== "true") return;
 
@@ -173,5 +164,5 @@ document.addEventListener("dblclick", e => {
 document.getElementById("enter-button").onclick = () => {
   const ts = document.getElementById("title-screen");
   ts.style.opacity = "0";
-  setTimeout(() => ts.style.display = "none", 800);
+  setTimeout(() => (ts.style.display = "none"), 800);
 };
