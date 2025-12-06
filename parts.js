@@ -16,57 +16,57 @@ let partLibrary = {
             partclass: null
         }
     ],
-    "ears": [
+    "ear": [
         {
             id: 101,
             name: "draco",
             icon: "images/ear/ears1.png",
-            partclass: "ears",
+            partclass: "ear selectable",
         },
         {
             id: 102,
             name: "bnuuy",
             icon: "images/ear/ears2.png",
-            partclass: "ears",
+            partclass: "ear selectable",
         },
         {
             id: 103,
             name: "heehaw",
             icon: "images/ear/ears3.png",
-            partclass: "ears",
+            partclass: "ear selectable",
 
         },
         {
             id: 104,
             name: "face tube",
             icon: "images/ear/ears4.png",
-            partclass: "ears",
+            partclass: "ear selectable",
         },
     ],
-    "eyes": [
+    "eye": [
         {
             id: 201,
             name: "ojo",
             icon: "images/eye/eye1.png",
-            partclass: "eyes",
+            partclass: "eye selectable",
         },
         {
             id: 202,
             name: "tbd",
             icon: "images/null.png",
-            partclass: "eyes",
+            partclass: "eye selectable",
         },
         {
             id: 203,
             name: "tbd",
             icon: "images/null.png",
-            partclass: "eyes",
+            partclass: "eye selectable",
         },
         {
             id: 204,
             name: "tbd",
             icon: "images/null.png",
-            partclass: "eyes",
+            partclass: "eye selectable",
         },
     ],
     "mouth": [
@@ -74,25 +74,25 @@ let partLibrary = {
             id: 301,
             name: "beakeasy",
             icon: "images/mouth/mouth1.png",
-            partclass: "mouth",
+            partclass: "mouth selectable",
         },
         {
             id: 302,
             name: "funkytrunk",
             icon: "images/mouth/mouth2.png",
-            partclass: "mouth",
+            partclass: "mouth selectable",
         },
         {
             id: 303,
             name: "gee-pa",
             icon: "images/mouth/mouth3.png",
-            partclass: "mouth",
+            partclass: "mouth selectable",
         },
         {
             id: 304,
             name: "draingo",
             icon: "images/mouth/mouth4.png",
-            partclass: "mouth",
+            partclass: "mouth selectable",
         },
     ],
     "tail": [
@@ -100,25 +100,25 @@ let partLibrary = {
             id: 401,
             name: "leggard",
             icon: "images/tail/tail1.png",
-            partclass: "tail",
+            partclass: "tail selectable",
         },
         {
             id: 402,
             name: "kittycoon",
             icon: "images/tail/tail2.png",
-            partclass: "tail",
+            partclass: "tail selectable",
         },
         {
             id: 403,
             name: "possibum",
             icon: "images/tail/tail3.png",
-            partclass: "tail",
+            partclass: "tail selectable",
         },
         {
             id: 404,
             name: "puff-flall",
             icon: "images/tail/tail4.png",
-            partclass: "tail",
+            partclass: "tail selectable",
         },
     ],
     "leg": [
@@ -126,25 +126,25 @@ let partLibrary = {
             id: 501,
             name: "tbd",
             icon: "images/null.png",
-            partclass: "leg",
+            partclass: "leg selectable",
         },
         {
             id: 502,
             name: "tbd",
             icon: "images/null.png",
-            partclass: "leg",
+            partclass: "leg selectable",
         },
         {
             id: 503,
             name: "tbd",
             icon: "images/null.png",
-            partclass: "leg",
+            partclass: "leg selectable",
         },
         {
             id: 504,
             name: "tbd",
             icon: "images/null.png",
-            partclass: "leg",
+            partclass: "leg selectable",
         },
     ],
 };
