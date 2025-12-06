@@ -2,24 +2,37 @@ const pinboard = document.getElementById("pinboard");
 const screenContainer = document.getElementById("screen-container");
 
 let currentScreen = 1;
-const screen1 = document.getElementById("screen-1");
-const screen2 = document.getElementById("screen-2");
+
+// Collect all screens automatically
+const screens = Array.from(document.querySelectorAll(".screen"));
+const totalScreens = screens.length;
 
 const leftArrow = document.getElementById("left-arrow");
 const rightArrow = document.getElementById("right-arrow");
 
-rightArrow.onclick = () => switchScreen(2);
-leftArrow.onclick = () => switchScreen(1);
+// Move backwards or forwards
+leftArrow.onclick = () => switchScreen(currentScreen - 1);
+rightArrow.onclick = () => switchScreen(currentScreen + 1);
 
 function switchScreen(target) {
+  if (target < 1 || target > totalScreens) return; // bounds checking
   if (target === currentScreen) return;
-  if (target === 2) {
-    screen1.style.left = "-100%";
-    screen2.style.left = "0";
-  } else {
-    screen1.style.left = "0";
-    screen2.style.left = "100%";
-  }
+
+  const oldScreen = screens[currentScreen - 1];
+  const newScreen = screens[target - 1];
+
+  const slideLeft = target > currentScreen;
+
+  // Start new screen offscreen on correct side
+  newScreen.style.left = slideLeft ? "100%" : "-100%";
+
+  // Force browser to register the initial position before animating
+  newScreen.getBoundingClientRect();
+
+  // Slide screens
+  oldScreen.style.left = slideLeft ? "-100%" : "100%";
+  newScreen.style.left = "0";
+
   currentScreen = target;
 }
 
