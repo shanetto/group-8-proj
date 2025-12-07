@@ -2,31 +2,85 @@ const pinboard = document.getElementById("pinboard");
 const screenContainer = document.getElementById("screen-container");
 
 let currentScreen = 1;
+let pageMalleable = ".ear";
 const screen1 = document.getElementById("screen-1");
 const screen2 = document.getElementById("screen-2");
+const screen3 = document.getElementById("screen-3");
+const screen4 = document.getElementById("screen-4");
 
 const leftArrow = document.getElementById("left-arrow");
 const rightArrow = document.getElementById("right-arrow");
 
-rightArrow.onclick = () => switchScreen(2);
-leftArrow.onclick = () => switchScreen(1);
+
+rightArrow.onclick = function() {
+  if (currentScreen <= 3) {
+    switchScreen(currentScreen + 1);
+  };
+};
+leftArrow.onclick = function() {
+  if (currentScreen >= 1) {
+    switchScreen(currentScreen - 1);
+  };
+};
 
 function switchScreen(target) {
   if (target === currentScreen) return;
-  if (target === 2) {
-    screen1.style.left = "-100%";
-    screen2.style.left = "0";
-  } else {
-    screen1.style.left = "0";
-    screen2.style.left = "100%";
-  }
+  switch(target) {
+    case(1):
+      screen1.style.left = "0";
+      screen2.style.left = "200%";
+      screen3.style.left = "400%";
+      screen4.style.left = "600%";
+      pageMalleable = ".ear"
+      break;
+    case(2):
+      screen1.style.left = "-200%";
+      screen2.style.left = "0";
+      screen3.style.left = "400%";
+      screen4.style.left = "600%";
+      pageMalleable = ".eye"
+      break;
+    case(3):
+      screen1.style.left = "-400%";
+      screen2.style.left = "-200%";
+      screen3.style.left = "0";
+      screen4.style.left = "200%";
+      pageMalleable = ".mouth"
+      break;
+    case(4):
+      screen1.style.left = "-600%";
+      screen2.style.left = "-400%";
+      screen3.style.left = "-200%";
+      screen4.style.left = "0";
+      pageMalleable = ".tail"
+      break;
+  };
   currentScreen = target;
+
+  document.querySelectorAll(pageMalleable).forEach((ear) => {
+    ear.dataset.homeParent = ear.parentNode.id;
+    ear.dataset.homeIndex = [...ear.parentNode.children].indexOf(ear);
+    ear.style.touchAction = "none";
+    ear.addEventListener("pointerdown", onPointerDown);
+  });
+
+  document.addEventListener("dblclick", (e) => {
+    const el = e.target.closest(pageMalleable);
+    if (!el || el.dataset.removedFromMenu !== "true") return;
+
+    const homeParent = document.getElementById(el.dataset.homeParent);
+    const homeIndex = parseInt(el.dataset.homeIndex, 10);
+    const kids = [...homeParent.children];
+
+    restoreEarStyles(el);
+
+    if (homeIndex >= kids.length) homeParent.appendChild(el);
+    else homeParent.insertBefore(el, kids[homeIndex]);
+
+    delete el.dataset.removedFromMenu;
+  });
 }
 
-document.querySelectorAll(".ear").forEach((ear) => {
-  ear.dataset.homeParent = ear.parentNode.id;
-  ear.dataset.homeIndex = [...ear.parentNode.children].indexOf(ear);
-});
 
 let dragged = null;
 let placeholder = null;
@@ -37,6 +91,7 @@ let raf = null;
 let targetX = 0,
   targetY = 0;
 
+// Click and drag a bodypart.
 function onPointerDown(e) {
   if (e.pointerType === "mouse" && e.button !== 0) return;
   e.preventDefault();
@@ -70,6 +125,7 @@ function onPointerDown(e) {
   window.addEventListener("pointerup", onPointerUp);
 }
 
+// Moving the cursor.
 function onPointerMove(e) {
   if (!dragged || e.pointerId !== pointerId) return;
   e.preventDefault();
@@ -140,29 +196,12 @@ function restoreEarStyles(el) {
   el.classList.remove("dragging");
 }
 
-document.querySelectorAll(".ear").forEach((ear) => {
-  ear.style.touchAction = "none";
-  ear.addEventListener("pointerdown", onPointerDown);
-});
-
-document.addEventListener("dblclick", (e) => {
-  const el = e.target.closest(".ear");
-  if (!el || el.dataset.removedFromMenu !== "true") return;
-
-  const homeParent = document.getElementById(el.dataset.homeParent);
-  const homeIndex = parseInt(el.dataset.homeIndex, 10);
-  const kids = [...homeParent.children];
-
-  restoreEarStyles(el);
-
-  if (homeIndex >= kids.length) homeParent.appendChild(el);
-  else homeParent.insertBefore(el, kids[homeIndex]);
-
-  delete el.dataset.removedFromMenu;
-});
-
+// Title screen enter
 document.getElementById("enter-button").onclick = () => {
   const ts = document.getElementById("title-screen");
   ts.style.opacity = "0";
   setTimeout(() => (ts.style.display = "none"), 800);
+  switchScreen(2) // This fixes the overlay for some reason.
+  switchScreen(1)
 };
+

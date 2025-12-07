@@ -80,8 +80,29 @@ body {
 
 
 .ear {
+  width: 200px;
+  height: 200px;
+  cursor: grab;
+  user-select: none;
+}
+
+.eye {
   width: 100px;
   height: 100px;
+  cursor: grab;
+  user-select: none;
+}
+
+.mouth {
+  width: 200px;
+  height: 200px;
+  cursor: grab;
+  user-select: none;
+}
+
+.tail {
+  width: 200px;
+  height: 200px;
   cursor: grab;
   user-select: none;
 }
