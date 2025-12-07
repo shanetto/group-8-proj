@@ -1,5 +1,3 @@
-console.log(partLibrary);
-
 // Populate parts on screen based on data from parts.js.
 function populatePartPage() {
 	// Page 1 - ears.
@@ -14,10 +12,7 @@ function populatePartPage() {
 
 // Populates part HTML based on type.
 function populatePartList(partType) {
-
-	console.log("Validating part:", partType, validatePart(partType))
 	if (validatePart(partType) == true) {
-
 		let partList = [];
 
 		for (i = 0; i < (Reflect.ownKeys(partLibrary[partType]).length - 1); i++) {
@@ -46,19 +41,11 @@ function validatePart(partType) {
 // Inserts HTML part based on ID location.
 function applyHTMLPage (screen, part) {
 	const elementHTML = document.getElementById(screen);
-	//const newImg = document.createElement('img');
-
 	let partList = populatePartList(part)
-	//console.log(partList)
+
 	for (const element of partList) {
-		console.log(element)
 		elementHTML.innerHTML += element
-		//elementHTML.insertAdjacentHTML("afterend", element)
-		//newImg.innerHTML = element
-		//elementHTML.appendChild(newImg)	
 	};
-	
-	//element.insertAdjacentHTML("afterend", populatePartList(part))
 };
 
 // Trigger by default.

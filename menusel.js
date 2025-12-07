@@ -43,7 +43,7 @@ function switchScreen(target) {
     case(3):
       screen1.style.left = "-400%";
       screen2.style.left = "-200%";
-      screen3.style.left = "-";
+      screen3.style.left = "0";
       screen4.style.left = "200%";
       pageMalleable = ".mouth"
       break;
@@ -54,14 +54,33 @@ function switchScreen(target) {
       screen4.style.left = "0";
       pageMalleable = ".tail"
       break;
-  }
+  };
   currentScreen = target;
+
+  document.querySelectorAll(pageMalleable).forEach((ear) => {
+    ear.dataset.homeParent = ear.parentNode.id;
+    ear.dataset.homeIndex = [...ear.parentNode.children].indexOf(ear);
+    ear.style.touchAction = "none";
+    ear.addEventListener("pointerdown", onPointerDown);
+  });
+
+  document.addEventListener("dblclick", (e) => {
+    const el = e.target.closest(pageMalleable);
+    if (!el || el.dataset.removedFromMenu !== "true") return;
+
+    const homeParent = document.getElementById(el.dataset.homeParent);
+    const homeIndex = parseInt(el.dataset.homeIndex, 10);
+    const kids = [...homeParent.children];
+
+    restoreEarStyles(el);
+
+    if (homeIndex >= kids.length) homeParent.appendChild(el);
+    else homeParent.insertBefore(el, kids[homeIndex]);
+
+    delete el.dataset.removedFromMenu;
+  });
 }
 
-document.querySelectorAll(pageMalleable).forEach((ear) => {
-  ear.dataset.homeParent = ear.parentNode.id;
-  ear.dataset.homeIndex = [...ear.parentNode.children].indexOf(ear);
-});
 
 let dragged = null;
 let placeholder = null;
@@ -176,28 +195,6 @@ function restoreEarStyles(el) {
   el.style.cursor = "grab";
   el.classList.remove("dragging");
 }
-
-document.querySelectorAll(pageMalleable).forEach((ear) => {
-  ear.style.touchAction = "none";
-  ear.addEventListener("pointerdown", onPointerDown);
-});
-
-// Double click
-document.addEventListener("dblclick", (e) => {
-  const el = e.target.closest(pageMalleable);
-  if (!el || el.dataset.removedFromMenu !== "true") return;
-
-  const homeParent = document.getElementById(el.dataset.homeParent);
-  const homeIndex = parseInt(el.dataset.homeIndex, 10);
-  const kids = [...homeParent.children];
-
-  restoreEarStyles(el);
-
-  if (homeIndex >= kids.length) homeParent.appendChild(el);
-  else homeParent.insertBefore(el, kids[homeIndex]);
-
-  delete el.dataset.removedFromMenu;
-});
 
 // Title screen enter
 document.getElementById("enter-button").onclick = () => {
