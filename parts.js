@@ -52,14 +52,14 @@ let partLibrary = {
         },
         {
             id: 202,
-            name: "tbd",
-            icon: "images/null.png",
+            name: "anotha",
+            icon: "images/eye/Another_eye.png",
             partclass: "eye selectable",
         },
         {
             id: 203,
-            name: "tbd",
-            icon: "images/null.png",
+            name: "predatory",
+            icon: "images/eye/Predator.png",
             partclass: "eye selectable",
         },
         {
